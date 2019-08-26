@@ -4,11 +4,14 @@
   "description": "An Electron wrapper for WhatsApp Web",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder ."
   },
-  "author": "",
+  "repository": "https://github.com/kenxjy/whatsapp-electron",
+  "author": "Kenneth Yue",
   "license": "CC0-1.0",
   "devDependencies": {
-    "electron": "^6.0.4"
+    "electron": "^6.0.4",
+    "electron-builder": "^21.2.0"
   }
 }
