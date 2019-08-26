@@ -1,4 +1,5 @@
 const { app, BrowserWindow, shell } = require('electron')
+const path = require('path');
 
 let window
 const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.131 Safari/537.36';
@@ -8,6 +9,7 @@ function createWindow() {
     width: 1024,
     height: 768,
     title: 'WhatsApp',
+    icon: path.join(__dirname, 'assets/WhatsApp-icon.png'),
     webPreferences: { devTools: false }
   });
 
