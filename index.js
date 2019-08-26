@@ -1,8 +1,23 @@
 const { app, BrowserWindow, shell } = require('electron')
 const path = require('path');
 
-let window
 const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.131 Safari/537.36';
+
+let window;
+
+const isFirstInstance = app.requestSingleInstanceLock();
+
+if (!isFirstInstance) {
+  app.quit();
+  return;
+}
+
+app.on('second-instance', () => {
+  if (window) {
+    if (window.isMinimized()) { window.restore(); }
+    window.focus();
+  }
+});
 
 function createWindow() {
   window = new BrowserWindow({
