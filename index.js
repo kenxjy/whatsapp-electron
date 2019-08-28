@@ -1,9 +1,10 @@
-const { app, BrowserWindow, shell } = require('electron')
-const path = require('path');
-
-const userAgent = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.131 Safari/537.36';
+const { app } = require('electron')
+const { loadWhatsApp } = require('./src/window');
+const { createTrayIconFor } = require('./src/tray');
+const { clearServiceWorkers } = require('./src/session');
 
 let window;
+let tray;
 
 const isFirstInstance = app.requestSingleInstanceLock();
 
@@ -19,24 +20,11 @@ app.on('second-instance', () => {
   }
 });
 
-function createWindow() {
-  window = new BrowserWindow({
-    width: 1024,
-    height: 768,
-    title: 'WhatsApp',
-    icon: path.join(__dirname, 'assets/WhatsApp-icon.png'),
-    webPreferences: { devTools: false }
-  });
-
-  window.setMenuBarVisibility(false);
-  window.on('closed', () => window = null);
-  window.webContents.on('new-window', (event, url) => {
-    shell.openExternal(url);
-    event.preventDefault();
-  });
-  
-  window.loadURL('https://web.whatsapp.com/', { userAgent });
+const startApp = () => {
+  window = loadWhatsApp();
+  tray = createTrayIconFor(window, app);
 }
 
-app.on('ready', createWindow);
+app.on('ready', startApp);
+app.on('before-quit', clearServiceWorkers);
 app.on('window-all-closed', () => app.quit());
