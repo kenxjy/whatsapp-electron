@@ -1,7 +1,6 @@
 {
   "name": "whatsapp-electron",
-  "version": "1.0.0",
-  "description": "An Electron wrapper for WhatsApp Web",
+  "description": "Unofficial desktop client for WhatsApp Web",
   "main": "index.js",
   "scripts": {
     "start": "electron .",
