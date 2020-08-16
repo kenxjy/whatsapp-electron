@@ -1,10 +1,6 @@
 name: Build/release
 
-on: 
-  push:
-    branches: [master]
-    tags:
-      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
+on: push
 
 jobs:
   release:
@@ -26,6 +22,7 @@ jobs:
       - name: Build/release Electron app
         uses: samuelmeuli/action-electron-builder@v1
         with:
+          skip_build: true
           # GitHub token, automatically provided to the action
           # (No need to define this secret in the repo settings)
           github_token: ${{ secrets.github_token }}

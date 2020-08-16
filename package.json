@@ -4,7 +4,8 @@
   "description": "Unofficial desktop client for WhatsApp Web",
   "main": "index.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "build": "electron-builder ."
   },
   "repository": "https://github.com/kenxjy/whatsapp-electron",
   "author": "Kenneth Yue",
